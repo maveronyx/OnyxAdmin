@@ -4,10 +4,14 @@ import org.bukkit.configuration.file.FileConfigurationOptions;
 
 
 public class Config {
+	/* (suggested by Tustin)
+	 * This whole class is already implemented in bukkit's Configuration class. We don't need
+	 * to reinvent the wheel.
+	 */
 
-	OnyxAdmin plugin;
+	private OnyxAdmin plugin;
 
-	FileConfigurationOptions config;
+	private FileConfigurationOptions config;
 	
 	public Config(OnyxAdmin instance){
 		plugin = instance;
@@ -15,6 +19,10 @@ public class Config {
 	}
 	
 	private void initConfig(){
+		/* TODO (suggested by Tustin)
+		 * This method can be replaced, in the latest versions of bukkit, by supplying a 
+		 * config.yml IN the jar file and calling the Configuration.copyDefaults() method.
+		 */
 		
 		addDefault("messages.enabled", true);
 		addDefault("messages.player.warn", "Warning");

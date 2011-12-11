@@ -18,8 +18,8 @@ import org.bukkit.entity.Player;
 public class AdminCommands {
 
 	private HashMap<String, Integer> warnedPlayers;
-	OnyxAdmin plugin;
-	FileConfiguration config;
+	private OnyxAdmin plugin;
+	private FileConfiguration config;
 
 	/**
 	 * Initialize the class

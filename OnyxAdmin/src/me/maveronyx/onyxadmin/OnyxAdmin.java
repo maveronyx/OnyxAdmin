@@ -11,24 +11,23 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class OnyxAdmin extends JavaPlugin {
 
-	Logger log = Logger.getLogger("Minecraft");
-	Config conf;
+	private static final Logger log = Logger.getLogger("Minecraft");
+	private Config conf;
 
-	OnyxAdminText chat;
-	boolean messagesEnabled = true;
-	PluginManager pm;
-	HashSet<String> burning = new HashSet<String>();
+	private OnyxAdminText chat;
+	private boolean messagesEnabled = true;
+	private PluginManager pm;
+	private HashSet<String> burning = new HashSet<String>();
 	public ArrayList<String> frozenPlayers = new ArrayList<String>();
 	public HashMap<String, Integer> warnedPlayers = new HashMap<String, Integer>();
 	
-	OnyxAdminCommandExecutor commandExecutor;
+	private OnyxAdminCommandExecutor commandExecutor;
 	
-	private final OnyxAdminPlayerListener playerListener = new OnyxAdminPlayerListener(
-			this);
+	private final OnyxAdminPlayerListener playerListener = new OnyxAdminPlayerListener(this);
 
 	@Override
 	public void onEnable() {
-
+		
 		// Get the config
 		conf = new Config(this);
 

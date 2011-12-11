@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 public class OnyxAdminText{
 
-	OnyxAdmin plugin;
+	private OnyxAdmin plugin;
 	
 	public OnyxAdminText(OnyxAdmin instance){
 		plugin = instance;

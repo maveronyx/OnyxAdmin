@@ -6,7 +6,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class OnyxAdminPlayerListener extends PlayerListener {
 
-	OnyxAdmin plugin;
+	private OnyxAdmin plugin;
 	
 	public OnyxAdminPlayerListener(OnyxAdmin instance) {
 		plugin = instance;

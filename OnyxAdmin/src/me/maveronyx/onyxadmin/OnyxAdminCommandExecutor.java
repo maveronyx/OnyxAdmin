@@ -14,18 +14,18 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
 public class OnyxAdminCommandExecutor implements CommandExecutor {
+	private static final Logger log = Logger.getLogger("Minecraft");
 
-	HashMap<String, Integer> commandMap = new HashMap<String, Integer>();
-	AdminCommands adminCommands;
-	OnyxAdmin plugin;
-	FileConfiguration config;
-	Logger log = Logger.getLogger("Minecraft");
+	private HashMap<String, Integer> commandMap = new HashMap<String, Integer>();
+	private AdminCommands adminCommands;
+	private OnyxAdmin plugin;
+	private FileConfiguration config;
 
 	public OnyxAdminCommandExecutor(OnyxAdmin instance) {
 
 		plugin = instance;
-
 		config = instance.getConfig();
+		adminCommands = new AdminCommands(plugin, config);
 
 		// Register all commands and map them
 		commandMap.put("warn", 1);
@@ -50,14 +50,20 @@ public class OnyxAdminCommandExecutor implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
 		if (sender instanceof Player) {
-
-			adminCommands = new AdminCommands(plugin, config);
 			
 			String cmd = command.getName().toLowerCase();
 
 			log.info("[OnyxAdmin] Command " + cmd + " called");
 
 			if (commandMap.containsKey(cmd)) {
+				/* TODO (as suggested by Tustin)
+				 * We have a commandMap here. Instead of mapping from a string to an integer, which
+				 * is then used in a switch statement, use Object Oriented programming to its fullest:
+				 * Map strings to Command Objects, which get a executeCommand() method called on them.
+				 * Copy all the code below into those individual command objects, along with their
+				 * respective methods in AdminCommands, and now the code is easier to read, manage, and
+				 * is slightly faster (though the first two are more important in the long run).
+				 */
 				Integer commandId = commandMap.get(cmd);
 
 				switch (commandId) {
@@ -71,7 +77,7 @@ public class OnyxAdminCommandExecutor implements CommandExecutor {
 								// All online players
 								Player[] targets = plugin.getServer().getOnlinePlayers();
 
-								plugin.log.info("Players online: " + targets + " " + targets.length);
+								log.info("Players online: " + targets + " " + targets.length);
 								
 								if (targets.length > 0) {
 									for (Player target : targets) {
